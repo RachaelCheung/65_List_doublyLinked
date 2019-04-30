@@ -43,6 +43,26 @@ public class List_inChainOfNodes{
             stringRep += node.getCargo() + ",";
         return stringRep + "]";
     }
+	
+	 // /**
+      // Demo use of links to previous Nodes.
+
+      // @return a string representation of this list,
+              // iterating through the list
+              // from tail to head.
+      // format, using ` as separator
+          // [element0`element1`element2`]
+     // */
+    // public String toString() {
+        // String stringRep = "tail-first [";
+
+        // for( Node node = getNode(this.size() - 1)
+			// ;node != null && node.getPrevNode() != null
+			// ;node = node.getPrevNode()
+           // )
+				// {stringRep += node.getCargo() + "`";}
+        // return stringRep + "]";
+    // }
 
 
     /**
