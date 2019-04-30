@@ -10,7 +10,7 @@ public class List_inChainOfNodes{
       Construct an empty list
      */
     public List_inChainOfNodes() {
-        headSentinel = new Node( null, null);
+        headSentinel = new Node( null, null, null);
     }
 
     /**
@@ -51,8 +51,11 @@ public class List_inChainOfNodes{
       @return true, in keeping with conventions yet to be discussed
      */
      public boolean addAsHead( Object val) {
-        headSentinel.setNextNode(
-          new Node( val, headSentinel.getNextNode()));
+ 		  
+        Node newHead = new Node( headSentinel, val, headSentinel.getNextNode());
+		headSentinel.setNextNode(newHead);
+		if (headSentinel.getNextNode() != null)
+			(headSentinel.getNextNode()).setPrevNode(newHead);
         return true;
      }
 
@@ -116,10 +119,16 @@ public class List_inChainOfNodes{
      */
     public boolean add( int index, Object value) {
         Node newNode = new Node( value);
+		Node beforeNew = getNodeBefore( index);
         Node afterNew = /* the node that should follow newNode
           in the augmented list */
-          getNodeBefore( index).setNextNode( newNode);
+          beforeNew.setNextNode( newNode);
+		
         newNode.setNextNode( afterNew);
+		newNode.setPrevNode( beforeNew);
+		
+		if (afterNew!=null)
+			afterNew.setPrevNode(newNode);
         return true;
     }
 
@@ -135,8 +144,12 @@ public class List_inChainOfNodes{
     public Object remove( int index) {
         Node before = getNodeBefore( index);
         Node ax = before.getNextNode();
+		Node after = ax.getNextNode();
         Object saveForReturn = ax.getCargo();
-        before.setNextNode( ax.getNextNode());
+        before.setNextNode( after);
+		
+		if (after !=null)
+			after.setPrevNode( before);
         return saveForReturn;
     }
 }
