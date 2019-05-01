@@ -4,16 +4,16 @@
 
 public class List_inChainOfNodes{
     private Node headSentinel;
-    private Node endSentinel;
+    //private Node endSentinel;
 
      
     /**
       Construct an empty list
      */
     public List_inChainOfNodes() {
-        headSentinel = new Node( null, null, null);
-		endSentinel = new Node(headSentinel, null, null);
-		headSentinel.setNextNode(endSentinel);
+        headSentinel = new Node( headSentinel, null, headSentinel);
+		//endSentinel = new Node(headSentinel, null, null);
+		//headSentinel.setNextNode(endSentinel);
     }
 
     /**
@@ -21,51 +21,51 @@ public class List_inChainOfNodes{
      */
     public int size() {
         // recursive approach seems more perspicuous
-        return size( headSentinel, endSentinel);
+        return size( headSentinel);
     }
 
     // recursively-called helper
-    private int size( Node startingAt, Node stoppingAt) {
+    private int size( Node startingAt) {
         Node next = startingAt.getNextNode();
-        if( next == stoppingAt) return 0;
-        else return 1+ size( next, stoppingAt);
+        if( next == null) return 0;
+        else return 1+ size( next);
     }
 
 
-     // /**
-       // @return a string representation of this list,
-       // format:
-           // # elements [element0,element1,element2,]
-      // */
-    // public String toString() {
-        // String stringRep = size() + " elements [";
-
-        // for( Node node = headSentinel.getNextNode()
-           // ; node != null
-           // ; node = node.getNextNode() )
-            // stringRep += node.getCargo() + ",";
-        // return stringRep + "]";
-    // }
-	
-	 /**
-      Demo use of links to previous Nodes.
-
-      @return a string representation of this list,
-              iterating through the list
-              from tail to head.
-      format, using ` as separator
-          [element0`element1`element2`]
-     */
+     /**
+       @return a string representation of this list,
+       format:
+           # elements [element0,element1,element2,]
+      */
     public String toString() {
-        String stringRep = "tail-first [";
+        String stringRep = size() + " elements [";
 
-        for( Node node = getNode(this.size() - 1)
-			;node != null && node.getPrevNode() != null
-			;node = node.getPrevNode()
-           )
-				{stringRep += node.getCargo() + "`";}
+        for( Node node = headSentinel.getNextNode()
+           ; node != null
+           ; node = node.getNextNode() )
+            stringRep += node.getCargo() + ",";
         return stringRep + "]";
     }
+	
+	 // /**
+      // Demo use of links to previous Nodes.
+
+      // @return a string representation of this list,
+              // iterating through the list
+              // from tail to head.
+      // format, using ` as separator
+          // [element0`element1`element2`]
+     // */
+    // public String toString() {
+        // String stringRep = "tail-first [";
+
+        // for( Node node = getNode(this.size() - 1)
+			// ;node != null && node.getPrevNode() != null
+			// ;node = node.getPrevNode()
+           // )
+				// {stringRep += node.getCargo() + "`";}
+        // return stringRep + "]";
+    // }
 
 
     /**
