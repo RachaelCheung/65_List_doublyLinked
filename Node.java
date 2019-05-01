@@ -56,7 +56,7 @@ public class Node {
     }
 	
 	public Node setPrevNode( Node prevNode) {
-		Node saveForReturn = this.nextNode;
+		Node saveForReturn = this.prevNode;
         this.prevNode = prevNode;
         return saveForReturn;
 	}
